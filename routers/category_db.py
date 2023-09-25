@@ -35,21 +35,21 @@ async def category(category: Categories, id:int):
         db_client.categories.find_one_and_update({"_id":id}, {"$set": {"last_modification_date": creation_modification_date(), "name_category": category_dict["name_category"]}})
     except:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='Categoria no modificada')
-    return search_category("_id", id)
+    return (search_category("_id", id))
 
 @router.delete('/{id}',status_code=status.HTTP_204_NO_CONTENT)
 async def category(id: int):
-    if not db_client.categories.find_one_and_delete({"_id":id}):
+    if not (db_client.categories.find_one_and_delete({"_id":id})):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,detail='Categoria no eliminada')
     else:
         raise HTTPException(status_code=status.HTTP_200_OK,detail='Categoria eliminada correctamente')
 
-def search_category(field: int, key):
+def search_category(field, key):
     try:
         category = db_client.categories.find_one({field:key})
         return Categories(**(category_schema(category)))
     except:
-        return {"Error":"Usuario no encontrado"}
+        return {"Error":"Categoria no encontrada"}
 
 def creation_modification_date():
     return str(datetime.now())

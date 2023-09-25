@@ -1,12 +1,15 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
-class Categories(BaseModel):
+class Products(BaseModel):
     id : Optional[int] = None
-    name_category : str
+    title : str
+    price : int
+    description : Optional[str] = None
+    category : Optional[int] = None
     creation_date : Optional[str] = str(datetime.now())
     last_modification_date : Optional[str] = str(datetime.now())
-    image : Optional[str] = None
+    images : Optional[List] = None
 
 

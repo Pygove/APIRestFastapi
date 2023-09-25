@@ -3,7 +3,8 @@ def category_schema(category) -> dict:
             "id" : category["_id"],
             "name_category":category["name_category"],
             "creation_date":category["creation_date"],
-            "last_modification_date":category["last_modification_date"]
+            "last_modification_date":category["last_modification_date"],
+            "image" : category["image"]
             }
 
 def categories_schema(categories) -> list:

@@ -1,1 +1,1 @@
-"CRUD FastAPI Users, Categories, Producs"
+"FastAPI Users, Categories, Producs"

@@ -4,6 +4,7 @@ from schemas.user import user_schema, users_schema
 from config.db import db_client
 from datetime import datetime
 from config.creation_counters import increment_couter
+from passlib.context import CryptContext
 
 router = APIRouter(prefix='/api/users', tags=['users'],responses={status.HTTP_404_NOT_FOUND: {"message":"No encontrado"}})
 
@@ -23,6 +24,7 @@ async def user(user : User):
         user_dict = dict(user)
         del user_dict["id"]
         user_dict["_id"] = increment_couter("usersID")
+        user_dict["password"] = CryptContext(schemes=["bcrypt"]).hash(user_dict["password"])
         db_client.users.insert_one(user_dict)
         new_user = user_schema(db_client.users.find_one({"_id":user_dict["_id"]}))
         return User(**new_user)

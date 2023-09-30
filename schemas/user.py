@@ -1,9 +1,17 @@
 def user_schema(user) -> dict:
-    return{'id':str(user['_id']),
-           'Nombre':user["first_name"],
-           'Apellido':user['last_name'],
-           'Email':user['email'],
-           'Usuario':user['username']}
+    return{
+           'id':user["_id"],
+           'username':user["username"],
+           'first_name':user['first_name'],
+           'last_name':user['last_name'],
+           'email':user['email'],
+           'password':user['password'],
+           'gender':str(user['gender']),
+           'role' : user['role'],
+           'avatar' : user['avatar'],
+            "creation_date":user["creation_date"],
+            "last_modification_date":user["last_modification_date"]
+    }
 
 def users_schema(users) -> list:
     return [user_schema(user) for user in users]

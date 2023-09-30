@@ -3,7 +3,6 @@ from models.products import Products
 from models.category import Categories
 from schemas.products import product_schema, products_schema
 from config.db import db_client
-#from bson import ObjectId
 from datetime import datetime
 from config.creation_counters import increment_couter
 from routers.category_db import search_category
